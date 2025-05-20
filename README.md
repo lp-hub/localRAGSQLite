@@ -2,7 +2,7 @@
 
 ## Free, local, open-source RAG with SQLite, LLaMA-3-8B GGUF & FAISS
 
-Created & tested with Python 3.12, llama-cpp-python, LangChain, FAISS, and Gradio. Works entirely offline on Ubuntu-based system with NVIDIA GPU (for CUDA acceleration) and GGUF model (e.g. LLaMA-3-8B-Uncensored.Q8_0.gguf).
+Created & tested with Python 3.12, llama-cpp-python, LangChain, FAISS, and Gradio. Works offline on Ubuntu-based system with NVIDIA GPU (for CUDA acceleration) and GGUF model (e.g. LLaMA-3-8B-Uncensored.Q8_0.gguf).
 
 #### Set up:
 
