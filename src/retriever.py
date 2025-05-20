@@ -1,4 +1,6 @@
 import hashlib
+import re
+
 from pathlib import Path
 
 from db import insert_document, insert_chunks, get_existing_hashes
@@ -12,7 +14,8 @@ def hash_file(file_path):
 
 def chunk_documents(data_dir, split_func):
     """
-    Chunk documents and track metadata in SQLite, returning a list of LangChain Document objects
+    Chunk documents and track metadata in SQLite, returning 
+    a list of LangChain Document objects
     with embedded metadata for FAISS indexing.
     """
     docs = []
@@ -43,7 +46,25 @@ def chunk_documents(data_dir, split_func):
         insert_chunks(doc_id, chunks)
 
         # Build LangChain Document objects with metadata for FAISS
+        def is_trash(chunk: str) -> bool:
+            chunk = chunk.strip()
+            if len(chunk) < 10:
+                return True
+            total_chars = len(chunk)
+            if total_chars == 0:
+                return True
+            alnum_chars = len(re.findall(r'\w', chunk))
+            ratio = alnum_chars / total_chars
+            if ratio < 0.7:
+                return True
+            return False
+
+        # Usage example inside your chunking loop:
         for idx, (chunk, page_num) in enumerate(chunks):
+            chunk = ' '.join(chunk.split())  # normalize spaces
+            if is_trash(chunk):
+                print(f"[FILTERED] Trash chunk skipped: {chunk[:50]}...")
+                continue
             docs.append(Document(
                 page_content=chunk,
                 metadata={
