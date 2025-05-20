@@ -1,6 +1,6 @@
 # localRAGSQLite
 
-## Free, local, open-source RAG with SQLite, LLaMA-3-8B & FAISS
+## Free, local, open-source RAG with SQLite & FAISS
 
 Created & tested with Python 3.12, llama-cpp-python, LangChain, FAISS, and Gradio. Works offline on Ubuntu-based system with NVIDIA GPU (for CUDA acceleration) and GGUF model
 
