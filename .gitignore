@@ -1,0 +1,16 @@
+# Ignore Python cache
+__pycache__/
+*.pyc
+
+# Local config
+config.py
+.env
+
+#Local folders
+db/
+faiss_db/
+logs/
+venv/
+
+#Local files
+*.db
