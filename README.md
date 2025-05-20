@@ -30,7 +30,7 @@ deactivate # after usig RAG
 
 pip install --upgrade pip
 
-pip install gradio langchain pypdf tiktoken faiss-cpu sentence-transformers sqlite-utils
+pip install faiss-cpu gradio langchain pymupdf pypdf sentence-transformers sqlite-utils tiktoken
 
 5. Install llama-cpp-python with CUDA support
 
