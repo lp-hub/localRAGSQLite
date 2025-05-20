@@ -60,7 +60,8 @@ def chunk_documents(data_dir, split_func):
             return False
 
         # Usage example inside your chunking loop:
-        for idx, (chunk, page_num) in enumerate(chunks):
+        for idx, chunk in enumerate(chunks):
+            page_num = "?"
             chunk = ' '.join(chunk.split())  # normalize spaces
             if is_trash(chunk):
                 print(f"[FILTERED] Trash chunk skipped: {chunk[:50]}...")
