@@ -1,16 +1,50 @@
 # Ignore Python cache
 __pycache__/
-*.pyc
+*.py[cod]
+*.pyo
+*.pyd
+*.so
 
-# Local config
+# Virtual environments
+venv/
+env/
+.venv/
+ENV/
+
+# Logs and runtime
+logs/
+*.log
+
+# Local config / secrets
 config.py
 .env
+*.secret
+*.key
 
-#Local folders
-db/
+# FAISS / vector store
 faiss_db/
-logs/
-venv/
+*.faiss
+index.faiss
 
-#Local files
+# SQLite / local databases
 *.db
+*.sqlite
+*.sqlite3
+
+# Jupyter / notebooks
+.ipynb_checkpoints/
+
+# Editor/IDE metadata
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# System-specific files
+.DS_Store
+Thumbs.db
+
+# Build / dist
+build/
+dist/
+*.egg-info/

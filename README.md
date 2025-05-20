@@ -13,6 +13,7 @@ git clone https://github.com/lp-hub/localRAGSQLite.git && cd localRAGSQLite
 2. Install GCC / build tools
 
 sudo apt update
+
 sudo apt install python3 python3.12-venv build-essential cmake
 
 https://visualstudio.microsoft.com/visual-cpp-build-tools/ for Windows, whatever...
@@ -48,7 +49,9 @@ Supported file types are automatically handled by the loader.
 8. Rename config.template.py to config.py and configure
 
 DATA_DIR = '/directory_with_files'
+
 DB_DIR = "/faiss_db/"
+
 MODEL_PATH = "/AI_model.gguf"
 
 #### Usage
