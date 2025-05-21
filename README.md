@@ -75,8 +75,6 @@ Open the IP in your browser for a simple web-based interface.
 
 Your computer may not be powerful enough to run some models.
 
-#### Acknowledgements
-
 localRAG reworked by ChatGPT4 and me.
 ├── db
 ├── faiss_db
