@@ -16,7 +16,7 @@ def print_local_ip():
 
 def gradio_rag(query):
     try:
-        print(f"[INFO] Got query: {query}")
+        print(f"Got query: {query}")
         sources, answer = run_rag_with_provenance(query, retriever, MODEL_PATH)
     except Exception as e:
         print(f"[ERROR] Failed to run RAG: {e}")

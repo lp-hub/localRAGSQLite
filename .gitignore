@@ -17,6 +17,7 @@ logs/
 
 # Local config / secrets
 config.py
+tree.py
 .env
 *.secret
 *.key
@@ -48,3 +49,6 @@ Thumbs.db
 build/
 dist/
 *.egg-info/
+
+# Directory tree
+.git

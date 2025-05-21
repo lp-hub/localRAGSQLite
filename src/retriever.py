@@ -71,7 +71,7 @@ def chunk_documents(data_dir, split_func):
             continue
 
         chunks = split_func(text)
-        print(f"[INFO] Indexed: {path} | Chunks: {len(chunks)}")
+        print(f"Indexed: {path} | Chunks: {len(chunks)}")
 
         trash_count = sum(1 for chunk in chunks if is_trash(chunk))
 #        if trash_count / len(chunks) > 0.7:
@@ -106,6 +106,6 @@ def chunk_documents(data_dir, split_func):
                 }
             ))
 
-            print(f"[INFO] Accepted {accepted}/{len(chunks)} chunks from {path}")
+            print(f"Accepted {accepted}/{len(chunks)} chunks from {path}")
 
     return docs

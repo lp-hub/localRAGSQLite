@@ -10,7 +10,7 @@ from llm import run_rag, parse_args
 from logger import log_exception
 from retriever import chunk_documents
 from store import create_vector_store, load_vector_store
-from utils import split_into_chunks
+from chunker import split_into_chunks
 
 # === Main Script Execution ===
 
@@ -43,7 +43,7 @@ def main():
 
         try:
             sources, response = run_rag(query, retriever, args.model_path)
-            print("\nSources:\n", sources)
+            print("\nw\n", sources)
             print("\nAssistant:\n", response)
         except Exception as e:
             log_exception("Error during RAG pipeline", e, context=query)

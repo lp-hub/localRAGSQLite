@@ -22,15 +22,15 @@ def backup_old_db():
         timestamp = datetime.now().strftime("%Y-%m-%d_%H%M%S")
         backup_path = DB_PATH.with_name(f"metadata_{timestamp}.db")
         shutil.move(DB_PATH, backup_path)
-        print(f"[INFO] Old DB backed up as: {backup_path}")
+        print(f"Old DB backed up as: {backup_path}")
 
 def init_db(rebuild=False):
-    DB_PATH.parent.mkdir(parents=True, exist_ok=True)  # ensure db exists
+    DB_PATH.parent.mkdir(parents=True, exist_ok=True)  # ensure DB exists
     if rebuild and DB_PATH.exists():  # only backup if rebuild=True
         backup_old_db()
-        if DB_PATH.exists():  # ensure db still exists before unlink
+        if DB_PATH.exists():  # ensure DB still exists before unlink
             try:
-                DB_PATH.unlink()  # delete db if rebuild=True
+                DB_PATH.unlink()  # delete DB if rebuild=True
             except FileNotFoundError:
                 pass
 

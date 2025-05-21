@@ -30,7 +30,7 @@ deactivate # after usig RAG
 
 pip install --upgrade pip
 
-pip install faiss-cpu gradio langchain langchain-community langchain-huggingface pymupdf pypdf sentence-transformers sqlite-utils tiktoken
+pip install faiss-cpu gradio langchain langchain-community langchain-huggingface pathspec pymupdf pypdf sentence-transformers sqlite-utils tiktoken
 
 5. Install llama-cpp-python with CUDA support
 
@@ -78,3 +78,34 @@ Your computer may not be powerful enough to run some models.
 #### Acknowledgements
 
 localRAG reworked by ChatGPT4 and me.
+├── db
+├── faiss_db
+├── help
+│   ├── learning.txt
+│   ├── LLama-3-8b-Uncensored.txt
+│   └── SQLite.txt
+├── logs
+├── scripts
+├── src
+│   ├── __pycache__
+│   ├── db
+│   │   ├── __pycache__
+│   │   ├── __init__.py
+│   │   ├── admin.py
+│   │   ├── db.py
+│   │   ├── filtering_cli.py
+│   │   ├── provenance.py
+│   │   └── ui.py
+│   ├── chunker.py
+│   ├── config.template.py
+│   ├── formatter.py
+│   ├── llm.py
+│   ├── logger.py
+│   ├── main.py
+│   ├── retriever.py
+│   ├── store.py
+│   └── webui.py
+├── venv
+├── .gitignore
+├── README.md
+└── requirements.txt
