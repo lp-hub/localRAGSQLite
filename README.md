@@ -50,9 +50,7 @@ Supported file types are automatically handled by the loader.
 8. Rename config.template.py to config.py and configure
 
 DATA_DIR = '/directory_with_files'
-
 DB_DIR = "/faiss_db/"
-
 MODEL_PATH = "/AI_model.gguf"
 
 #### Usage
