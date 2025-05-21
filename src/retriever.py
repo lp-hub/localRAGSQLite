@@ -84,7 +84,11 @@ def chunk_documents(data_dir, split_func):
         insert_chunks(doc_id, chunks)
 
         accepted = 0
-        for idx, chunk in enumerate(chunks):
+        for idx, item in enumerate(chunks):
+            if isinstance(item, tuple):
+                chunk, page_num = item
+            else:
+                chunk = item
             page_num = "?"  # Or extract this from tuple if split_func returns it
             chunk = ' '.join(chunk.split())
             if is_trash(chunk):
