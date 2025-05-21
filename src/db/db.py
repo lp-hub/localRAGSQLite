@@ -5,6 +5,18 @@ from pathlib import Path
 
 DB_PATH = Path("db/metadata.db")
 
+def is_metadata_db_empty():
+    if not DB_PATH.exists():
+        return True
+    conn = sqlite3.connect(DB_PATH)
+    cur = conn.cursor()
+    try:
+        cur.execute("SELECT COUNT(*) FROM chunks")
+        return cur.fetchone()[0] == 0
+    except sqlite3.OperationalError:
+        # Table missing or malformed DB
+        return True
+
 def backup_old_db():
     if DB_PATH.exists():
         timestamp = datetime.now().strftime("%Y-%m-%d_%H%M%S")
@@ -13,10 +25,14 @@ def backup_old_db():
         print(f"[INFO] Old DB backed up as: {backup_path}")
 
 def init_db(rebuild=False):
-    DB_PATH.parent.mkdir(parents=True, exist_ok=True)  # ensure ./db exists
-    if rebuild and DB_PATH.exists():  # only backup if a rebuild is required
+    DB_PATH.parent.mkdir(parents=True, exist_ok=True)  # ensure db exists
+    if rebuild and DB_PATH.exists():  # only backup if rebuild=True
         backup_old_db()
-        DB_PATH.unlink()  # delete the existing DB if rebuild=True
+        if DB_PATH.exists():  # ensure db still exists before unlink
+            try:
+                DB_PATH.unlink()  # delete db if rebuild=True
+            except FileNotFoundError:
+                pass
 
     conn = sqlite3.connect(DB_PATH)
     cur = conn.cursor()
@@ -52,7 +68,6 @@ def get_existing_hashes():
     cur.execute("SELECT hash FROM documents")
     return set(row[0] for row in cur.fetchall())
 
-
 def insert_document(path, title, hash_, source_type, embedding_model):
     conn = init_db()
     cur = conn.cursor()
@@ -63,7 +78,6 @@ def insert_document(path, title, hash_, source_type, embedding_model):
     conn.commit()
     return cur.lastrowid
 
-
 def insert_chunks(document_id, chunks):
     conn = init_db()
     cur = conn.cursor()
@@ -72,7 +86,6 @@ def insert_chunks(document_id, chunks):
         VALUES (?, ?, ?)
     ''', [(document_id, i, chunk) for i, chunk in enumerate(chunks)])
     conn.commit()
-
 
 def fetch_metadata_by_content(content_substring):
     conn = init_db()
@@ -85,15 +98,3 @@ def fetch_metadata_by_content(content_substring):
     ''', (f"%{content_substring[:50]}%",))
     row = cur.fetchone()
     return {"title": row[0], "timestamp": row[1], "path": row[2]} if row else {}
-
-def is_metadata_db_empty():
-    if not DB_PATH.exists():
-        return True
-    conn = sqlite3.connect(DB_PATH)
-    cur = conn.cursor()
-    try:
-        cur.execute("SELECT COUNT(*) FROM chunks")
-        return cur.fetchone()[0] == 0
-    except sqlite3.OperationalError:
-        # Table missing or malformed DB
-        return True
