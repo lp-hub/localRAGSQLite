@@ -1,10 +1,22 @@
 import sqlite3
+import shutil
+from datetime import datetime
 from pathlib import Path
 
 DB_PATH = Path("db/metadata.db")
 
-def init_db():
+def backup_old_db():
+    if DB_PATH.exists():
+        timestamp = datetime.now().strftime("%Y-%m-%d_%H%M%S")
+        backup_path = DB_PATH.with_name(f"metadata_{timestamp}.db")
+        shutil.move(DB_PATH, backup_path)
+        print(f"[INFO] Old DB backed up as: {backup_path}")
+
+def init_db(rebuild=False):
     DB_PATH.parent.mkdir(parents=True, exist_ok=True)  # ensure ./db exists
+    if rebuild and DB_PATH.exists():  # only backup if a rebuild is required
+        backup_old_db()
+        DB_PATH.unlink()  # delete the existing DB if rebuild=True
 
     conn = sqlite3.connect(DB_PATH)
     cur = conn.cursor()
@@ -73,3 +85,15 @@ def fetch_metadata_by_content(content_substring):
     ''', (f"%{content_substring[:50]}%",))
     row = cur.fetchone()
     return {"title": row[0], "timestamp": row[1], "path": row[2]} if row else {}
+
+def is_metadata_db_empty():
+    if not DB_PATH.exists():
+        return True
+    conn = sqlite3.connect(DB_PATH)
+    cur = conn.cursor()
+    try:
+        cur.execute("SELECT COUNT(*) FROM chunks")
+        return cur.fetchone()[0] == 0
+    except sqlite3.OperationalError:
+        # Table missing or malformed DB
+        return True

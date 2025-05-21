@@ -57,7 +57,7 @@ MODEL_PATH = "/AI_model.gguf"
 
 1. Run the CLI interface
 
-python3 main.py --rebuild-db # use --rebuild-db first time or to make new db from new files
+python3 src/main.py --rebuild-db # use --rebuild-db first time or to make new db from new files
 
 First run will embed and index documents.
 You'll get an interactive prompt (You:) for local Q&A with sources.

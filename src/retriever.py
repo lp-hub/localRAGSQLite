@@ -58,7 +58,7 @@ def chunk_documents(data_dir, split_func):
 
         file_hash = hash_file(path)
         if file_hash in existing_hashes:
-            print(f"[SKIP] Already indexed: {path}")
+            print(f"[SKIP] Already indexed: {path}(hash: {file_hash})")
             continue
 
         try:
