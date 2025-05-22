@@ -20,9 +20,9 @@ https://visualstudio.microsoft.com/visual-cpp-build-tools/ for Windows, whatever
 
 3. Create and activate virtual environment
 
-cd /../localRAG && python3.12 -m venv venv # to create venv dir
+cd /../localRAGSQLite && python3.12 -m venv venv # to create venv dir
 
-source venv/bin/activate # (venv) USER@PC:/../localRAG$
+source venv/bin/activate # (venv) USER@PC:/../localRAGSQLite$
 
 deactivate # after usig RAG
 
